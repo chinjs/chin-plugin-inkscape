@@ -2,6 +2,7 @@
 
 - `InkPdf`
 - `InkPdfMerge`
+- `InkPdfMergePrint`
 - `InkPdfPrint`
 - `InkPng`
 - `InkPngWhite`
