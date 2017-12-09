@@ -1,0 +1,26 @@
+{
+  "name": "chin-plugins-inkscape",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": true,
+  "prettier": {
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true
+  },
+  "scripts": {
+    "format": "prettier --write **/*.js",
+    "build": "babel src -d dist"
+  },
+  "dependencies": {
+    "fs-extra": "^4.0.3",
+    "inkscape": "^1.2.0",
+    "pdf-merge": "^1.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "prettier": "^1.9.1"
+  }
+}
