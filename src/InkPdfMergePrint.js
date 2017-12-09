@@ -32,7 +32,7 @@ export default opts => {
     return pipe(
       new Inkscape([
         '--export-pdf',
-        `--export-area-page`,
+        '--export-area-drawing',
         '--export-width=1024'
       ])
     )
