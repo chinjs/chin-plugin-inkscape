@@ -1,7 +1,7 @@
-import IkcPdf from './IkcPdf.js'
-import IkcPdfMerge from './IkcPdfMerge.js'
-import IkcPdfPrint from './IkcPdfPrint.js'
-import IkcPng from './IkcPng.js'
-import IkcPngWhite from './IkcPngWhite.js'
+import InkPdf from './InkPdf.js'
+import InkPdfMerge from './InkPdfMerge.js'
+import InkPdfPrint from './InkPdfPrint.js'
+import InkPng from './InkPng.js'
+import InkPngWhite from './InkPngWhite.js'
 
-export { IkcPdf, IkcPdfMerge, IkcPdfPrint, IkcPng, IkcPngWhite }
+export { InkPdf, InkPdfMerge, InkPdfPrint, InkPng, InkPngWhite }

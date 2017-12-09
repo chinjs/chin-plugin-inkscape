@@ -3,32 +3,32 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.IkcPngWhite = exports.IkcPng = exports.IkcPdfPrint = exports.IkcPdfMerge = exports.IkcPdf = undefined;
+exports.InkPngWhite = exports.InkPng = exports.InkPdfPrint = exports.InkPdfMerge = exports.InkPdf = undefined;
 
-var _IkcPdf = require('./IkcPdf.js');
+var _InkPdf = require('./InkPdf.js');
 
-var _IkcPdf2 = _interopRequireDefault(_IkcPdf);
+var _InkPdf2 = _interopRequireDefault(_InkPdf);
 
-var _IkcPdfMerge = require('./IkcPdfMerge.js');
+var _InkPdfMerge = require('./InkPdfMerge.js');
 
-var _IkcPdfMerge2 = _interopRequireDefault(_IkcPdfMerge);
+var _InkPdfMerge2 = _interopRequireDefault(_InkPdfMerge);
 
-var _IkcPdfPrint = require('./IkcPdfPrint.js');
+var _InkPdfPrint = require('./InkPdfPrint.js');
 
-var _IkcPdfPrint2 = _interopRequireDefault(_IkcPdfPrint);
+var _InkPdfPrint2 = _interopRequireDefault(_InkPdfPrint);
 
-var _IkcPng = require('./IkcPng.js');
+var _InkPng = require('./InkPng.js');
 
-var _IkcPng2 = _interopRequireDefault(_IkcPng);
+var _InkPng2 = _interopRequireDefault(_InkPng);
 
-var _IkcPngWhite = require('./IkcPngWhite.js');
+var _InkPngWhite = require('./InkPngWhite.js');
 
-var _IkcPngWhite2 = _interopRequireDefault(_IkcPngWhite);
+var _InkPngWhite2 = _interopRequireDefault(_InkPngWhite);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.IkcPdf = _IkcPdf2.default;
-exports.IkcPdfMerge = _IkcPdfMerge2.default;
-exports.IkcPdfPrint = _IkcPdfPrint2.default;
-exports.IkcPng = _IkcPng2.default;
-exports.IkcPngWhite = _IkcPngWhite2.default;
+exports.InkPdf = _InkPdf2.default;
+exports.InkPdfMerge = _InkPdfMerge2.default;
+exports.InkPdfPrint = _InkPdfPrint2.default;
+exports.InkPng = _InkPng2.default;
+exports.InkPngWhite = _InkPngWhite2.default;

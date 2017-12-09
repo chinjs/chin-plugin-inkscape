@@ -1,7 +1,7 @@
 # chin-plugins-inkscape
 
-- `IkcPdf`
-- `IkcPdfMerge`
-- `IkcPdfPrint`
-- `IkcPng`
-- `IkcPngWhite`
+- `InkPdf`
+- `InkPdfMerge`
+- `InkPdfPrint`
+- `InkPng`
+- `InkPngWhite`
