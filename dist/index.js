@@ -3,7 +3,6 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 })
-exports.InkPngWhite = exports.InkPng = exports.InkPdfPrint = exports.InkPdfMergePrint = exports.InkPdfMerge = exports.InkPdf = undefined
 
 var _InkPdf = require('./InkPdf.js')
 
@@ -33,9 +32,11 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj }
 }
 
-exports.InkPdf = _InkPdf2.default
-exports.InkPdfMerge = _InkPdfMerge2.default
-exports.InkPdfMergePrint = _InkPdfMergePrint2.default
-exports.InkPdfPrint = _InkPdfPrint2.default
-exports.InkPng = _InkPng2.default
-exports.InkPngWhite = _InkPngWhite2.default
+exports.default = () => ({
+  InkPdf: _InkPdf2.default,
+  InkPdfMerge: _InkPdfMerge2.default,
+  InkPdfMergePrint: _InkPdfMergePrint2.default,
+  InkPdfPrint: _InkPdfPrint2.default,
+  InkPng: _InkPng2.default,
+  InkPngWhite: _InkPngWhite2.default
+})

@@ -5,11 +5,11 @@ import InkPdfPrint from './InkPdfPrint.js'
 import InkPng from './InkPng.js'
 import InkPngWhite from './InkPngWhite.js'
 
-export {
+export default () => ({
   InkPdf,
   InkPdfMerge,
   InkPdfMergePrint,
   InkPdfPrint,
   InkPng,
   InkPngWhite
-}
+})
