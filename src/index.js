@@ -1,74 +1,91 @@
 import Inkscape from 'inkscape'
 import pdfMerge from 'pdf-merge'
 import { remove, readdir } from 'fs-extra'
-import { format, join } from 'path'
+import { format, join, dirname } from 'path'
 import o2a from './o2a.js'
 
-const fwa = (obj, ...addition) => format(Object.assign(obj, ...addition))
+const formats = ['png', 'pdf', 'ps', 'eps', 'plain']
 
-const opts2options = (type, opts) => {
+const asserts = (condition, message) => {
+  if (!condition) {
+    throw new Error(message)
+  }
+}
+
+const s2a = (set) => [...set.values()]
+
+const fwa = (obj, ...addition) => format(Object.assign({}, obj, ...addition))
+
+const o2o = (f, opts) => {
 
   const {
     area,
+    dpi,
     width,
     height,
     background,
     backgroundOpacity,
-    raw: options = {}
+    config: options = {}
   } = opts || {}
 
-  options.export = Object.assign({}, options.export,
-    { [type]: true, width, height, background, backgroundOpacity },
-    !area ? false :
-    area === 'page' ? { areaPage: true } :
-    area === 'drawing' ? { areaDrawing: true } :
-    area === 'snap' ? { areaSnap: true } :
-    { area }
+  options.export = Object.assign(
+    {
+      [f]: true,
+      dpi,
+      width,
+      height,
+      background,
+      backgroundOpacity
+    },
+    (
+      !area ? false :
+      area === 'page' ? { areaPage: true } :
+      area === 'drawing' ? { areaDrawing: true } :
+      area === 'snap' ? { areaSnap: true } :
+      { area }
+    ),
+    options.export
   )
 
   return options
 }
 
-export const inkscape = (options) => {
-  const optionsAsArray = o2a(options)
-  const ext = (
-    optionsAsArray.includes('--export-png') ? '.png' :
-    optionsAsArray.includes('--export-pdf') ? '.pdf' :
-    optionsAsArray.includes('--export-ps') ? '.ps' :
-    optionsAsArray.includes('--export-eps') ? '.eps' :
-    optionsAsArray.includes('--export-plain-svg') ? '.svg' :
-    '.svg'
-  )
-  return {
-    isStream: true,
-    processor: (pipe, { out }) => [fwa(out, { ext }), pipe(new Inkscape(optionsAsArray))]
-  }
+export const inkscape = (format, opts) => {
+
+  asserts(format, `chin-plugin-inkscape: require format as first argument.`)
+  asserts(formats.includes(format), `chin-plugin-inkscape: ${format} is invalid format.`)
+
+  const [f, ext] = format === 'plain' ? ['plainSvg', '.svg'] : [format, `.${format}`]
+
+  const optionsAsArray = o2a(o2o(f, opts))
+
+  const processor = (pipe, { out }) => [fwa(out, { ext }), pipe(new Inkscape(optionsAsArray))]
+
+  return { isStream: true, processor }
 }
 
-export const inkscapePng = (opts) => inkscape(opts2options('png', opts))
-
-export const inkscapePdf = (opts) => inkscape(opts2options('pdf', opts))
-
-export const inkscapePs = (opts) => inkscape(opts2options('ps', opts))
-
-export const inkscapeEps = (opts) => inkscape(opts2options('eps', opts))
-
-export const inkscapePlainSvg = (opts) => inkscape(opts2options('plainSvg', opts))
-
 export const inkscapePdfMerge = (opts) => {
-  const filepaths = []
-  const dirpaths = []
-  const { isStream, processor: pdfProcessor } = inkscapePdf(opts)
 
-  const processor = (pipe, { out }) => {
-    const [outpath, stream] = pdfProcessor(pipe, { out })
-    filepaths.push(outpath)
-    dirpaths.push(out.dir)
+  const filepathsSet = new Set()
+  const dirpathsSet = new Set()
+
+  const { isStream, processor: pdfProcessor } = inkscape('pdf', opts)
+
+  const processor = (...arg) => {
+    const [outpath, stream] = pdfProcessor(...arg)
+    !filepathsSet.has(outpath) && filepathsSet.add(outpath)
+
+    const dirpath = dirname(outpath)
+    !dirpathsSet.has(dirpath) && dirpathsSet.add(dirpath)
+
     return [outpath, stream]
   }
 
-  const dist = (output, { noCleanAfter, sort } = {}) =>
-    pdfMerge(
+  const dist = (output, { noCleanAfter, sort } = {}) => {
+
+    const filepaths = s2a(filepathsSet)
+
+    return pdfMerge(
       (typeof sort !== 'function'
         ? filepaths
         : sort(filepaths)
@@ -79,22 +96,23 @@ export const inkscapePdfMerge = (opts) => {
       !noCleanAfter &&
       Promise.resolve()
       .then(() =>
-        Promise.all(filepaths.map(filepath =>
-          remove(filepath)
-        ))
+        Promise.all(filepaths.map(filepath => remove(filepath)))
       )
       .then(() =>
-        Promise.all(dirpaths.map(dirpath =>
-          readdir(dirpath)
-          .then(({ length }) =>
-            !length &&
-            remove(dirpath)
-          )
-        ))
+        Promise.all(s2a(dirpathsSet).map(dirpath => rcrRemoveDir(dirpath)))
       )
     )
+  }
 
   return { ext: { isStream, processor }, dist }
 }
+
+const rcrRemoveDir = (dirpath) =>
+  readdir(dirpath).then(({ length }) =>
+    !length &&
+    remove(dirpath).then(() =>
+      rcrRemoveDir(dirname(dirpath))
+    )
+  )
 
 export default inkscape

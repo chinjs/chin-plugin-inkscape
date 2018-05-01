@@ -1,5 +1,4 @@
 import paramCase from 'param-case'
-import optionsAsRaw from './options.js'
 
 export default (options = {}) => {
   const optionsAsArray = []
@@ -28,3 +27,45 @@ const throwInvalids = (invalids) => {
     invalids.join(',')
   )
 }
+
+export const optionsAsRaw = [
+  '--export-png',
+  '--export-area',
+  '--export-area-page',
+  '--export-area-drawing',
+  '--export-area-snap',
+  '--export-id',
+  '--export-id-only',
+  '--export-use-hints',
+  '--export-background',
+  '--export-background-opacity',
+  '--export-dpi',
+  '--export-width',
+  '--export-height',
+  '--export-ps',
+  '--export-eps',
+  '--export-pdf',
+  '--export-pdf-version',
+  '--export-latex',
+  '--export-ps-level',
+  '--export-text-to-path',
+  '--export-ignore-filters',
+  '--export-plain-svg',
+  '--print',
+  '--query-id',
+  '--query-x',
+  '--query-y',
+  '--query-width',
+  '--query-height',
+  '--query-all',
+  '--extension-directory',
+  '--verb-list',
+  '--verb',
+  '--select',
+  '--shell',
+  '--with-gui',
+  '--without-gui',
+  '--vacuum-defs',
+  '--no-convert-text-baseline-spacing',
+  '--g-fatal-warnings'
+]

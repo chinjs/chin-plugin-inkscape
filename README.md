@@ -5,6 +5,8 @@
 [![Build Status](https://img.shields.io/travis/kthjm/chin-plugin-inkscape.svg?style=flat-square)](https://travis-ci.org/kthjm/chin-plugin-inkscape)
 [![Coverage Status](https://img.shields.io/codecov/c/github/kthjm/chin-plugin-inkscape.svg?style=flat-square)](https://codecov.io/github/kthjm/chin-plugin-inkscape)
 
+[chin](https://github.com/kthjm/chin) plugin that operate Inkscape (and PDFtk).
+
 ## Installation
 ```shell
 yarn add -D chin-plugin-inkscape
@@ -12,66 +14,82 @@ yarn add -D chin-plugin-inkscape
 
 ## Usage
 
-### inkscape([options])
-options is [inkscape options](https://inkscape.org/en/doc/inkscape-man.html) as object. `export` and `query` is set as object, and all properties are set as camelCase.
+ref: [inkscape options](https://inkscape.org/en/doc/inkscape-man.html).
+
+### inkscape(format[, options])
 ```js
 import inkscape from 'chin-plugin-inkscape'
 
-const ext = inkscape({
-  export: { backgroundOpacity: 0.5 }, // => '--export-background-opacity=0.5'
-  query: { id: 'unique_id' },         // => '--query-id=unique_id'
-  noConvertTextBaselineSpacing: true  // => '--no-convert-text-baseline-spacing'
+const ext = inkscape('png', {
+  area,
+  dpi,
+  width,
+  height,
+  background,
+  backgroundOpacity,
+
+  /* detail setting */
+  config: {
+    export: { [camelProperty] },
+    query: { [camelProperty] },
+    [camelProperty]
+  }
 })
 ```
 
-### inkscapeFormat([options])
+#### format
+|value|as|
+|:-|:-|
+|`'png'`  |`--export-png`|
+|`'pdf'`  |`--export-pdf`|
+|`'ps'`   |`--export-ps`|
+|`'eps'`  |`--export-eps`|
+|`'plain'`|`--export-plain-svg`|
 
-Using them set to `--export-[format]`.
+#### area
+|value|as|
+|:-|:-|
+|`'page'` [default]|`--export-area-page`|
+|`'drawing'`       |`--export-area-drawing`|
+|`'snap'`          |`--export-area-snap`|
+|`'x0:y0:x1:y1'`   |`--export-area=x0:y0:x1:y1`|
 
-```js
-import {
-  inkscapePng,
-  inkscapePdf,
-  inkscapePs,
-  inkscapeEps,
-  inkscapePlainSvg
-} from 'chin-plugin-inkscape'
+#### options
 
-const ext = inkscapePng({
-  area: 'page',
-  width: 1024,
-  background: '#ffffff',
-  raw: { export: {}, query: {} }
-})
-```
-#### Options
-- area: `'page'` | `'drawing'` | `'snap'` | `'x0:y0:x1:y1'`
-- width
-- height
-- background
-- backgroundOpacity
-- raw: `inkscape()` options (for custom)
+- `dpi` [default: 96]
 
-### inkscapePdfMerge(outpath[, options])
+- `width/height` overrides the `dpi` setting
 
-merge pdf files after process. depending on [pdf-merge](https://github.com/wubzz/pdf-merge) (depend on [PDFtk](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)).
+- `background/backgroundOpacity`
+
+#### config
+For detail setting that must have all properties as camelCase. Setting `true` as value means just pass. Properties that belongs to `export` and `query` are passed as `--export-[property]` and `--query-[property]`.
+
+### inkscapePdfMerge([options])
+
+Merge pdf files after process. depending on [pdf-merge](https://github.com/wubzz/pdf-merge) (depend on [PDFtk](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)).
+
+`options` is same to above (no need `format`).
 
 ```js
 import { inkscapePdfMerge } from 'chin-plugin-inkscape'
 
-const { ext, dist } = inkscapePdfMerge( /*same inkscapePdf*/ )
+const { ext, dist } = inkscapePdfMerge()
+const sort = (filepaths) => filepaths.sort()
 
 export default {
   put: 'put',
   out: 'out',
   processors: { svg: ext },
-  after() => dist('out/merge.pdf')
+  after() => dist('out/merge.pdf', { sort })
 }
 ```
 
-#### Options
-- noCleanAfter: `boolean`
-- sort: `(filepath[]) => filepath[]`
+#### dist([options])
+
+- `sort` function for sort that pass filepaths
+
+- `noCleanAfter` prevent cleaning [default: false]
 
 ## License
 MIT (http://opensource.org/licenses/MIT)
