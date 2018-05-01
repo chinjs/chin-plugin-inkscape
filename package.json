@@ -1,29 +1,51 @@
 {
-  "name": "chin-plugins-inkscape",
-  "version": "0.0.0",
+  "name": "chin-plugin-inkscape",
+  "version": "0.0.1",
+  "repository": "kthjm/chin-plugin-inkscape",
+  "author": "kthjm <toxictoxer@gmail.com>",
   "main": "dist/index.js",
   "license": "MIT",
-  "private": true,
-  "prettier": {
-    "tabWidth": 2,
-    "semi": false,
-    "singleQuote": true
+  "description": "",
+  "keywords": [
+    "chin",
+    "inkscape"
+  ],
+  "nyc": {
+    "sourceMap": false,
+    "instrument": false,
+    "require": [
+      "babel-register"
+    ]
   },
   "scripts": {
-    "build": "babel src -d dist",
-    "postbuild": "prettier --write **/*.js"
+    "test": "cross-env BABEL_ENV=TEST nyc mocha",
+    "prebuild": "yarn test",
+    "build": "rollup -c",
+    "coverage": "nyc report --reporter=lcov && codecov"
   },
   "dependencies": {
     "fs-extra": "^4.0.3",
     "inkscape": "^1.2.0",
+    "param-case": "^2.1.1",
     "pdf-merge": "^1.0.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-istanbul": "^4.1.6",
     "babel-preset-env": "^1.6.1",
-    "prettier": "^1.9.1"
+    "babel-preset-power-assert": "^2.0.0",
+    "codecov": "^3.0.1",
+    "cross-env": "^5.1.4",
+    "mocha": "^5.1.1",
+    "nyc": "^11.7.1",
+    "power-assert": "^1.5.0",
+    "rollup": "^0.58.2",
+    "rollup-plugin-auto-external": "^1.2.0",
+    "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-prettier": "^0.4.0"
   },
   "peerDependencies": {
-    "chin": "^2.1.2"
+    "chin": "^3.0.1"
   }
 }

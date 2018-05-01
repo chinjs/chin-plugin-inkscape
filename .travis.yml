@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- '8'
+cache:
+  yarn: true
+  directories:
+  - node_modules
+after_success:
+- yarn coverage
+deploy:
+  provider: npm
+  email: toxictoxer@gmail.com
+  api_key:
+    secure: 2Dkplu6yB/9mlYGK2YQZGPXUIR0i+nIJ8px0ev5PQhZx5aMjYRQWNKRrTJVfUb9zeLIR3XRdif3ufQfOpPJbTIUmTCV++6aO46NOoBfGiuKKFXAj+tpuga5NARUaylAjFlo9CZCicC9ZKxqQ9q13L32qf0dKWaD0MjVH9t29qN3jQaz3L3Lugc3Kh0hqaSXPVH+jFdrjy17Qqrg+eEHZl5g18hAohIYmo4BcbCG2liL7Wv5pAe0DEMrKQXcplmb4oCBLIywemgFr4F41FRUNd7xzmBKMN4xEUfSzwxXR/9X0RyNfShwARwWbu+7ZtZJ01QcRzrk7ZlSdW9xOzZgyE4jjdMQEJ9YcphPe/J/h7hro7M4eenMgLu3sKzox3K3579kHXTl4nsv1g5RWfCaiakB9UEYJkmgAghl0pT3005RRBtf4kSzQNxs1mLcR6AF1t0PX0HdsmOlQfg4FtHKQQ3AWJqllOmBLj47VwYur2KtIc5MsAgJEO0SX4o4tsEwQ+rW3h+QicqticY+O71OUj7AO6MAPNK2AtNMhFWxoouZ7MRH6e/c2Pin5Qv3p0qGjncKG5ThfQk4CBtwVEF4a0mmV1cOqItWSMdSkRBrDwuyfWkv23IIXh6Z/uclXv5bP8+Nu07qULTwEhMusL2VsUfS/ZUv68GPc+ZKRgL1M5JQ=
+  on:
+    tags: true
+    repo: kthjm/chin-plugin-inkscape
+    branch: publish
