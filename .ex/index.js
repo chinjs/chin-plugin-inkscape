@@ -1,12 +1,12 @@
-const { inkscape, inkscapePdfMerge } = require('..')
-const { join } = require('path')
+import { inkscape, inkscapePdfMerge } from '../src'
+import { join } from 'path'
 
 const put = '.ex/put'
 const out = '.ex/out'
 
 const { ext, dist } = inkscapePdfMerge()
 
-module.exports = {
+export default {
   put,
   out,
   clean: true,
@@ -19,7 +19,7 @@ module.exports = {
     ['merge', { svg: ext }]
   ],
   after: () =>
-    dist(join(out, 'merged.pdf'), {
+    dist(join(out, 'merged/hoge/fuga/index.pdf'), {
       sort: (filepaths) => filepaths,
       noCleanAfter: false
     })

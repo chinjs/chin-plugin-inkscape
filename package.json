@@ -1,6 +1,6 @@
 {
   "name": "chin-plugin-inkscape",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": "kthjm/chin-plugin-inkscape",
   "author": "kthjm <toxictoxer@gmail.com>",
   "main": "dist/index.js",
@@ -23,7 +23,7 @@
     ]
   },
   "scripts": {
-    "ex": "chin -c .ex",
+    "ex": "cross-env BABEL_ENV=EXAMPLE chin -c .ex -r babel-register",
     "test": "cross-env BABEL_ENV=TEST nyc mocha",
     "prebuild": "yarn test",
     "build": "rollup -c",

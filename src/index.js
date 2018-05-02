@@ -1,6 +1,6 @@
 import Inkscape from 'inkscape'
 import pdfMerge from 'pdf-merge'
-import { remove, readdir } from 'fs-extra'
+import { outputFile, remove, readdir } from 'fs-extra'
 import { format, join, dirname } from 'path'
 import o2a from './o2a.js'
 
@@ -86,11 +86,12 @@ export const inkscapePdfMerge = (opts) => {
     const filepaths = s2a(filepathsSet)
 
     return pdfMerge(
-      (typeof sort !== 'function'
-        ? filepaths
-        : sort(filepaths)
-      ),
-      { output: join('./', output) }
+      typeof sort !== 'function'
+      ? filepaths
+      : sort(filepaths)
+    )
+    .then(buffer =>
+      outputFile(join('./', output), buffer)
     )
     .then(() =>
       !noCleanAfter &&

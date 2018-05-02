@@ -9,7 +9,7 @@
 
 ## Installation
 ```shell
-yarn add -D chin-plugin-inkscape
+yarn add -D chin chin-plugin-inkscape
 ```
 
 ## Usage
@@ -67,7 +67,7 @@ For detail setting that must have all properties as camelCase. Setting `true` as
 
 ### inkscapePdfMerge([options])
 
-Merge pdf files after process. depending on [pdf-merge](https://github.com/wubzz/pdf-merge) (depend on [PDFtk](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)).
+Merge pdf files after process. depending on [pdf-merge](https://github.com/wubzz/pdf-merge) (using [PDFtk](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)).
 
 `options` is same to above (no need `format`).
 
@@ -85,7 +85,7 @@ export default {
 }
 ```
 
-#### dist([options])
+#### dist(outpath[, options])
 
 - `sort` function for sort that pass filepaths
 

@@ -1,6 +1,6 @@
 import paramCase from 'param-case'
 
-export default (options = {}) => {
+export default (options) => {
   const optionsAsArray = []
   recursivePush(options, optionsAsArray)
   const invalids = optionsAsArray.filter(option => !optionsAsRaw.includes(option.split('=')[0]))

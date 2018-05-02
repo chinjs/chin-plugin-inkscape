@@ -96,10 +96,7 @@ var toConsumableArray = function(arr) {
   }
 }
 
-var o2a = function() {
-  var options =
-    arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {}
-
+var o2a = function(options) {
   var optionsAsArray = []
   recursivePush(options, optionsAsArray)
   var invalids = optionsAsArray.filter(function(option) {
@@ -297,28 +294,30 @@ var inkscapePdfMerge = function inkscapePdfMerge(opts) {
 
     var filepaths = s2a(filepathsSet)
 
-    return pdfMerge(typeof sort !== 'function' ? filepaths : sort(filepaths), {
-      output: path.join('./', output)
-    }).then(function() {
-      return (
-        !noCleanAfter &&
-        Promise.resolve()
-          .then(function() {
-            return Promise.all(
-              filepaths.map(function(filepath) {
-                return fsExtra.remove(filepath)
-              })
-            )
-          })
-          .then(function() {
-            return Promise.all(
-              s2a(dirpathsSet).map(function(dirpath) {
-                return rcrRemoveDir(dirpath)
-              })
-            )
-          })
-      )
-    })
+    return pdfMerge(typeof sort !== 'function' ? filepaths : sort(filepaths))
+      .then(function(buffer) {
+        return fsExtra.outputFile(path.join('./', output), buffer)
+      })
+      .then(function() {
+        return (
+          !noCleanAfter &&
+          Promise.resolve()
+            .then(function() {
+              return Promise.all(
+                filepaths.map(function(filepath) {
+                  return fsExtra.remove(filepath)
+                })
+              )
+            })
+            .then(function() {
+              return Promise.all(
+                s2a(dirpathsSet).map(function(dirpath) {
+                  return rcrRemoveDir(dirpath)
+                })
+              )
+            })
+        )
+      })
   }
 
   return { ext: { isStream: isStream, processor: processor }, dist: dist }
