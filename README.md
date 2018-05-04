@@ -14,7 +14,7 @@ yarn add -D chin chin-plugin-inkscape
 
 ## Usage
 
-ref: [inkscape options](https://inkscape.org/en/doc/inkscape-man.html).
+ref: [inkscape options](https://inkscape.org/en/doc/inkscape-man.html)
 
 ### inkscape(format[, options])
 ```js

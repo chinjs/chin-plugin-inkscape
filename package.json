@@ -1,20 +1,19 @@
 {
   "name": "chin-plugin-inkscape",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "repository": "kthjm/chin-plugin-inkscape",
   "author": "kthjm <toxictoxer@gmail.com>",
   "main": "dist/index.js",
   "license": "MIT",
-  "description": "Chin plugin that operate Inkscape(and PDFtk).",
+  "description": "Chin plugin using Inkscape (and PDFtk).",
   "keywords": [
     "chin",
-    "plugin",
+    "chin-plugin",
     "inkscape",
+    "pdftk",
     "svg",
     "png",
-    "pdf",
-    "pdf-merge",
-    "pdftk"
+    "pdf"
   ],
   "nyc": {
     "sourceMap": false,
