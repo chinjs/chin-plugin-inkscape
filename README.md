@@ -65,27 +65,32 @@ const ext = inkscape('png', {
 #### config
 For detail setting that must have all properties as camelCase. Setting `true` as value means just pass. Properties that belongs to `export` and `query` are passed as `--export-[property]` and `--query-[property]`.
 
-### inkscapePdfMerge([options])
+### inkscapeMergePdfs([options])
 
 Merge pdf files after process. depending on [pdf-merge](https://github.com/wubzz/pdf-merge) (using [PDFtk](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)).
 
 `options` is same to above (no need `format`).
 
 ```js
-import { inkscapePdfMerge } from 'chin-plugin-inkscape'
+import { inkscapeMergePdfs } from 'chin-plugin-inkscape'
 
-const { ext, dist } = inkscapePdfMerge()
-const sort = (filepaths) => filepaths.sort()
+const ext = inkscapeMergePdfs()
 
 export default {
   put: 'put',
   out: 'out',
   processors: { svg: ext },
-  after() => dist('out/merge.pdf', { sort })
+  after() =>
+    ext.after(
+      'out/merge.pdf',
+      { sort: (filepaths) => filepaths.sort() }
+    )
 }
 ```
 
-#### dist(outpath[, options])
+#### ext.after(outpath[, options])
+
+Write file that pdfs merged.
 
 - `sort` function for sort that pass filepaths
 

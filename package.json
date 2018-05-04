@@ -1,6 +1,6 @@
 {
   "name": "chin-plugin-inkscape",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": "kthjm/chin-plugin-inkscape",
   "author": "kthjm <toxictoxer@gmail.com>",
   "main": "dist/index.js",
@@ -8,6 +8,7 @@
   "description": "Chin plugin that operate Inkscape(and PDFtk).",
   "keywords": [
     "chin",
+    "plugin",
     "inkscape",
     "svg",
     "png",
@@ -23,7 +24,7 @@
     ]
   },
   "scripts": {
-    "ex": "cross-env BABEL_ENV=EXAMPLE chin -c .ex -r babel-register",
+    "ex": "cross-env BABEL_ENV=EXAMPLE chin -c .example -r babel-register",
     "test": "cross-env BABEL_ENV=TEST nyc mocha",
     "prebuild": "yarn test",
     "build": "rollup -c",
@@ -41,6 +42,7 @@
     "babel-plugin-istanbul": "^4.1.6",
     "babel-preset-env": "^1.6.1",
     "babel-preset-power-assert": "^2.0.0",
+    "chin": "^3.0.2",
     "codecov": "^3.0.1",
     "cross-env": "^5.1.4",
     "mocha": "^5.1.1",

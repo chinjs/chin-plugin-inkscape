@@ -64,7 +64,7 @@ export const inkscape = (format, opts) => {
   return { isStream: true, processor }
 }
 
-export const inkscapePdfMerge = (opts) => {
+export const inkscapeMergePdfs = (opts) => {
 
   const filepathsSet = new Set()
   const dirpathsSet = new Set()
@@ -81,7 +81,7 @@ export const inkscapePdfMerge = (opts) => {
     return [outpath, stream]
   }
 
-  const dist = (output, { noCleanAfter, sort } = {}) => {
+  const after = (output, { noCleanAfter, sort } = {}) => {
 
     const filepaths = s2a(filepathsSet)
 
@@ -105,7 +105,7 @@ export const inkscapePdfMerge = (opts) => {
     )
   }
 
-  return { ext: { isStream, processor }, dist }
+  return { isStream, processor, after }
 }
 
 const rcrRemoveDir = (dirpath) =>

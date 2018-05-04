@@ -264,7 +264,7 @@ var inkscape = function inkscape(format, opts) {
   return { isStream: true, processor: processor }
 }
 
-var inkscapePdfMerge = function inkscapePdfMerge(opts) {
+var inkscapeMergePdfs = function inkscapeMergePdfs(opts) {
   var filepathsSet = new Set()
   var dirpathsSet = new Set()
 
@@ -286,7 +286,7 @@ var inkscapePdfMerge = function inkscapePdfMerge(opts) {
     return [outpath, stream]
   }
 
-  var dist = function dist(output) {
+  var after = function after(output) {
     var _ref5 =
         arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
       noCleanAfter = _ref5.noCleanAfter,
@@ -320,7 +320,7 @@ var inkscapePdfMerge = function inkscapePdfMerge(opts) {
       })
   }
 
-  return { ext: { isStream: isStream, processor: processor }, dist: dist }
+  return { isStream: isStream, processor: processor, after: after }
 }
 
 var rcrRemoveDir = function rcrRemoveDir(dirpath) {
@@ -336,5 +336,5 @@ var rcrRemoveDir = function rcrRemoveDir(dirpath) {
 }
 
 exports.inkscape = inkscape
-exports.inkscapePdfMerge = inkscapePdfMerge
+exports.inkscapeMergePdfs = inkscapeMergePdfs
 exports.default = inkscape

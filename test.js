@@ -2,7 +2,7 @@ import assert from 'assert'
 import Inkscape from 'inkscape'
 import { parse, extname } from 'path'
 import o2a, { optionsAsRaw } from './src/o2a.js'
-import { inkscape, inkscapePdfMerge } from './src'
+import { inkscape, inkscapeMergePdfs } from './src'
 
 describe('processor()', () => {
   const pipe = (stream) => stream
@@ -23,11 +23,11 @@ describe('processor()', () => {
   it('eps', test('eps'))
   it('plain', test('plain', '.svg'))
 
-  it('inkscapePdfMerge', () => {
-    const { ext: { isStream, processor }, dist } = inkscapePdfMerge()
+  it('inkscapeMergePdfs', () => {
+    const { isStream, processor, after } = inkscapeMergePdfs()
     const [ outpath, stream ] = processor(pipe, util)
     assert.equal(isStream, true)
-    assert.ok(typeof dist === 'function')
+    assert.ok(typeof after === 'function')
     assert.equal(extname(outpath), '.pdf')
     assert.equal(stream.constructor, Inkscape)
   })
