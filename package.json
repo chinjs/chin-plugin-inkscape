@@ -1,6 +1,6 @@
 {
   "name": "chin-plugin-inkscape",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "repository": "kthjm/chin-plugin-inkscape",
   "author": "kthjm <toxictoxer@gmail.com>",
   "main": "dist/index.js",
@@ -41,7 +41,6 @@
     "babel-plugin-istanbul": "^4.1.6",
     "babel-preset-env": "^1.6.1",
     "babel-preset-power-assert": "^2.0.0",
-    "chin": "^3.0.2",
     "codecov": "^3.0.1",
     "cross-env": "^5.1.4",
     "mocha": "^5.1.1",
@@ -53,6 +52,6 @@
     "rollup-plugin-prettier": "^0.4.0"
   },
   "peerDependencies": {
-    "chin": "^3.0.1"
+    "chin": "^3.0.5"
   }
 }
