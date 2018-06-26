@@ -1,11 +1,11 @@
 # chin-plugin-inkscape
 
-[![npm](https://img.shields.io/npm/v/chin-plugin-inkscape.svg?style=flat-square)](https://www.npmjs.com/package/chin-plugin-inkscape)
-[![npm](https://img.shields.io/npm/dm/chin-plugin-inkscape.svg?style=flat-square)](https://www.npmjs.com/package/chin-plugin-inkscape)
-[![Build Status](https://img.shields.io/travis/kthjm/chin-plugin-inkscape.svg?style=flat-square)](https://travis-ci.org/kthjm/chin-plugin-inkscape)
-[![Coverage Status](https://img.shields.io/codecov/c/github/kthjm/chin-plugin-inkscape.svg?style=flat-square)](https://codecov.io/github/kthjm/chin-plugin-inkscape)
+[![npm](https://img.shields.io/npm/v/chin-plugin-inkscape.svg?longCache=true&style=flat-square)](https://www.npmjs.com/package/chin-plugin-inkscape)
+[![npm](https://img.shields.io/npm/dm/chin-plugin-inkscape.svg?longCache=true&style=flat-square)](https://www.npmjs.com/package/chin-plugin-inkscape)
+[![Build Status](https://img.shields.io/travis/chinjs/chin-plugin-inkscape.svg?longCache=true&style=flat-square)](https://travis-ci.org/chinjs/chin-plugin-inkscape)
+[![Coverage Status](https://img.shields.io/codecov/c/github/chinjs/chin-plugin-inkscape.svg?longCache=true&style=flat-square)](https://codecov.io/github/chinjs/chin-plugin-inkscape)
 
-[chin](https://github.com/kthjm/chin) plugin that operate Inkscape (and PDFtk).
+[chin](https://github.com/chinjs/chin) plugin that operate Inkscape (and PDFtk).
 
 ## Installation
 ```shell
