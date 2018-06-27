@@ -1,6 +1,6 @@
 {
   "name": "chin-plugin-inkscape",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "repository": "chinjs/chin-plugin-inkscape",
   "author": "kthjm <toxictoxer@gmail.com>",
   "main": "dist/index.js",
